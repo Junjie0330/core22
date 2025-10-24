@@ -4,7 +4,7 @@ $_SESSION = [];
 session_destroy();
 
 setcookie(session_name(), '', time() - 3600, '/');
-header("Location: login.php?message=Logged out securely");
+header("Location: index.php?message=Logged out securely");
 exit();
 
 ?>
