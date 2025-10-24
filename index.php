@@ -150,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: seller_login.php");
         exit();
     }
-
+    $username =trim($_POST["username"]);
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
 
@@ -163,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         try {
             $pdo = getDBConnection();
-            $stmt = $pdo->prepare("SELECT id, name, email, password FROM sellers WHERE email = ?");
+            $stmt = $pdo->prepare("SELECT id, username, email, password FROM sellers WHERE email = ?");
             $stmt->execute([$email]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -173,17 +173,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $otp = rand(100000, 999999);
 
                 $_SESSION['pending_user']   = $user['id'];
-                $_SESSION['pending_name']   = $user['name'];
+                $_SESSION['pending_name']   = $user['username'];
                 $_SESSION['pending_email']  = $user['email'];
                 $_SESSION['otp']            = (string)$otp;
                 $_SESSION['otp_expires']    = time() + 300;
 
                 try {
                     $mail = getMailer();
-                    $mail->addAddress($user['email'], $user['name']);
+                    $mail->addAddress($user['email'], $user['username']);
                     $mail->isHTML(true);
                     $mail->Subject = 'Your OTP Code - iMarket Seller';
-                    $mail->Body    = "Hello {$user['name']},<br><br>Your OTP is: <b>{$otp}</b><br><br>This code expires in 5 minutes.";
+                    $mail->Body    = "Hello {$user['username']},<br><br>Your OTP is: <b>{$otp}</b><br><br>This code expires in 5 minutes.";
 
                     $mail->send();
 

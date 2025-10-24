@@ -490,7 +490,7 @@ $statusCounts = [
 <body class="bg-gray-50">
 
     <!-- Include navbar and sidebar -->
-    <?php if (file_exists('includes/navbar.php')): include 'includes/navbar.php'; endif; ?>
+    
     <?php if (file_exists('includes/sidebar.php')): include 'includes/sidebar.php'; endif; ?>
 
     <!-- Lightbox for images -->

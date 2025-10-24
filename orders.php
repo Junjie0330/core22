@@ -241,9 +241,7 @@ $cancelled_orders = filterOrdersByStatus($orders, 'cancelled');
     </style>
 </head>
 <body class="bg-gray-50">
-    <?php if (file_exists('includes/navbar.php')): ?>
-        <?php include 'includes/navbar.php'; ?>
-    <?php endif; ?>
+   
     
     <?php if (file_exists('includes/sidebar.php')): ?>
         <?php include 'includes/sidebar.php'; ?>
@@ -778,4 +776,4 @@ $cancelled_orders = filterOrdersByStatus($orders, 'cancelled');
     </script>
 
 </body>
-</html>
+</html> 
